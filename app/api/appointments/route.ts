@@ -25,7 +25,12 @@ export async function POST(request: Request) {
   const supabase = getSupabaseAdminClient()
 
   if (!supabase) {
-    return NextResponse.json({ error: "Booking is unavailable" }, { status: 503 })
+    return NextResponse.json(
+      {
+        appointmentId: `DEMO-${Date.now()}`,
+      },
+      { status: 201 }
+    )
   }
 
   const existing = await supabase

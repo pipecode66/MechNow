@@ -11,6 +11,7 @@ import {
   isSessionConfigured,
   verifyPassword,
 } from "@/lib/auth"
+import { DEMO_ADMIN_EMAIL, DEMO_ADMIN_PASSWORD } from "@/lib/demo-mode"
 import { getSupabaseAdminClient } from "@/lib/supabase/admin"
 import { sendSms } from "@/lib/twilio"
 import {
@@ -97,7 +98,19 @@ export async function loginAction(
 
   const supabase = getSupabaseAdminClient()
   if (!supabase) {
-    return { error: "admin.loginNotConfigured" }
+    if (
+      parsed.data.email !== DEMO_ADMIN_EMAIL ||
+      parsed.data.password !== DEMO_ADMIN_PASSWORD
+    ) {
+      recordFailedLogin(ip)
+      return { error: "admin.loginInvalid" }
+    }
+
+    loginAttempts.delete(ip)
+    const token = await createSessionToken({ email: DEMO_ADMIN_EMAIL })
+    const cookieStore = await cookies()
+    cookieStore.set(ADMIN_SESSION_COOKIE, token, adminCookieOptions)
+    redirect("/admin/dashboard")
   }
 
   const { data, error } = await supabase
@@ -142,7 +155,7 @@ export async function updateAppointmentStatusAction(
   if (!parsed.success) return { success: false, error: "admin.errors.invalidStatus" }
 
   const supabase = getSupabaseAdminClient()
-  if (!supabase) return { success: false, error: "admin.errors.notConfigured" }
+  if (!supabase) return { success: true }
 
   const { error } = await supabase
     .from("appointments")
@@ -163,7 +176,7 @@ export async function deleteAppointmentAction(id: string): Promise<ActionResult>
   if (!parsed.success) return { success: false, error: "admin.errors.invalidAppointment" }
 
   const supabase = getSupabaseAdminClient()
-  if (!supabase) return { success: false, error: "admin.errors.notConfigured" }
+  if (!supabase) return { success: true }
 
   const { error } = await supabase.from("appointments").delete().eq("id", parsed.data)
   if (error) return { success: false, error: "admin.errors.deleteAppointment" }
@@ -183,7 +196,7 @@ export async function assignTechnicianAction(
   if (!parsed.success) return { success: false, error: "admin.errors.invalidAssignment" }
 
   const supabase = getSupabaseAdminClient()
-  if (!supabase) return { success: false, error: "admin.errors.notConfigured" }
+  if (!supabase) return { success: true }
 
   const { data: technicianData } = parsed.data.technicianName
     ? await supabase
@@ -251,7 +264,7 @@ export async function createTechnicianAction(
   if (!parsed.success) return { success: false, error: "admin.errors.invalidTechnician" }
 
   const supabase = getSupabaseAdminClient()
-  if (!supabase) return { success: false, error: "admin.errors.notConfigured" }
+  if (!supabase) return { success: true }
 
   const { error } = await supabase.from("technicians").insert({
     ...parsed.data,
@@ -277,7 +290,7 @@ export async function deleteTechnicianAction(id: string): Promise<ActionResult> 
   if (!parsed.success) return { success: false, error: "admin.errors.technicianNotFound" }
 
   const supabase = getSupabaseAdminClient()
-  if (!supabase) return { success: false, error: "admin.errors.notConfigured" }
+  if (!supabase) return { success: true }
 
   const { data: technicianData, error: technicianError } = await supabase
     .from("technicians")
@@ -323,7 +336,7 @@ export async function addZipCodeAction(zipCode: string): Promise<ActionResult> {
   if (!parsed.success) return { success: false, error: "admin.errors.invalidZip" }
 
   const supabase = getSupabaseAdminClient()
-  if (!supabase) return { success: false, error: "admin.errors.notConfigured" }
+  if (!supabase) return { success: true }
 
   const { error } = await supabase
     .from("service_zip_codes")
@@ -344,7 +357,7 @@ export async function deleteZipCodeAction(zipCode: string): Promise<ActionResult
   if (!parsed.success) return { success: false, error: "admin.errors.invalidZip" }
 
   const supabase = getSupabaseAdminClient()
-  if (!supabase) return { success: false, error: "admin.errors.notConfigured" }
+  if (!supabase) return { success: true }
 
   const { error } = await supabase
     .from("service_zip_codes")
@@ -376,7 +389,7 @@ async function setReviewStatus(
   if (!parsed.success) return { success: false, error: "admin.errors.invalidReview" }
 
   const supabase = getSupabaseAdminClient()
-  if (!supabase) return { success: false, error: "admin.errors.notConfigured" }
+  if (!supabase) return { success: true }
 
   const { error } = await supabase
     .from("reviews")
@@ -401,7 +414,7 @@ export async function deleteReviewAction(id: string): Promise<ActionResult> {
   if (!parsed.success) return { success: false, error: "admin.errors.invalidReview" }
 
   const supabase = getSupabaseAdminClient()
-  if (!supabase) return { success: false, error: "admin.errors.notConfigured" }
+  if (!supabase) return { success: true }
 
   const { error } = await supabase.from("reviews").delete().eq("id", parsed.data)
   if (error) return { success: false, error: "admin.errors.deleteReview" }

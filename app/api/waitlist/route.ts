@@ -17,7 +17,7 @@ export async function POST(request: Request) {
 
   const supabase = getSupabaseAdminClient()
   if (!supabase) {
-    return NextResponse.json({ error: "Waitlist service is unavailable" }, { status: 503 })
+    return NextResponse.json({ success: true, demo: true }, { status: 201 })
   }
 
   const { error } = await supabase.from("zip_code_waitlist").upsert(

@@ -14,7 +14,7 @@ mecanica movil. Incluye:
 
 - Node.js 20 o superior.
 - pnpm instalado.
-- Proyecto Supabase para probar persistencia y panel administrativo.
+- Proyecto Supabase opcional para probar persistencia real.
 
 Comprobar versiones:
 
@@ -32,6 +32,9 @@ pnpm install
 ```
 
 ## 2. Configurar variables de entorno
+
+Este paso es opcional para la entrega universitaria. Si no se crea `.env.local`,
+la aplicacion funciona en modo demo con datos de ejemplo.
 
 Crear un archivo `.env.local` en la raiz del proyecto tomando como base
 `.env.example`:
@@ -74,6 +77,8 @@ openssl rand -base64 32
 
 ## 3. Preparar Supabase
 
+Este paso tambien es opcional. Solo se requiere si se desea guardar datos reales.
+
 1. Crear un proyecto en Supabase.
 2. Abrir SQL Editor.
 3. Ejecutar el archivo:
@@ -110,6 +115,13 @@ values ('admin@example.com', 'HASH_BCRYPT_GENERADO');
 ```
 
 Usar ese correo y contrasena para entrar en `/admin/login`.
+
+Credenciales disponibles en modo demo, sin Supabase:
+
+```text
+Email: admin@mechnow.com
+Password: MechNow123!
+```
 
 ## 5. Ejecutar la app
 
@@ -157,8 +169,8 @@ En Chrome o Edge:
 ### Administrador
 
 1. Abrir `/admin/login`.
-2. Iniciar sesion con el admin creado en Supabase.
-3. Revisar la cita creada.
+2. Iniciar sesion con el admin creado en Supabase o con las credenciales demo.
+3. Revisar las citas de ejemplo del dashboard.
 4. Cambiar su estado.
 5. Crear un tecnico y asignarlo a la cita.
 6. Administrar ZIPs y moderar resenas.
@@ -185,7 +197,8 @@ cmd.exe /c pnpm build
 
 ### La reserva dice que el servicio no esta disponible
 
-Verificar que `.env.local` tenga las variables de Supabase y reiniciar `pnpm dev`.
+En modo demo, usar un ZIP con cobertura como `95814`. Si se usa Supabase,
+verificar que `.env.local` tenga las variables correctas y reiniciar `pnpm dev`.
 
 ### No se puede iniciar sesion como admin
 
@@ -195,6 +208,8 @@ Verificar:
 - Que existe un registro en `admin_users`.
 - Que el hash corresponde a la contrasena usada.
 - Que `SESSION_SECRET` esta configurado.
+
+Sin Supabase, usar `admin@mechnow.com` y `MechNow123!`.
 
 ### No llegan SMS
 

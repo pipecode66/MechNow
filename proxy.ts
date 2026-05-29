@@ -1,10 +1,11 @@
 import { NextResponse, type NextRequest } from "next/server"
 import { jwtVerify } from "jose"
+import { getSessionSecretValue } from "@/lib/demo-mode"
 
 const ADMIN_SESSION_COOKIE = "admin_session"
 
 function getSessionSecret(): Uint8Array | null {
-  const secret = process.env.SESSION_SECRET
+  const secret = getSessionSecretValue()
   return secret ? new TextEncoder().encode(secret) : null
 }
 

@@ -20,7 +20,11 @@ export async function GET(request: Request) {
 
   const supabase = getSupabaseServerClient()
   if (!supabase) {
-    return NextResponse.json({ error: "Availability is unavailable" }, { status: 503 })
+    return NextResponse.json({
+      date: parsed.data.date,
+      bookedSlots: [],
+      availableSlots: getAvailableSlots([]),
+    })
   }
 
   try {

@@ -126,14 +126,14 @@ export async function validateAddress(
 
   try {
     const nominatim = await tryNominatim(address)
-    if (nominatim) return nominatim
+    if (nominatim?.status === "valid") return nominatim
   } catch {
     // Try Census before declaring geocoding unavailable.
   }
 
   try {
     const census = await tryCensus(address)
-    if (census) return census
+    if (census?.status === "valid") return census
   } catch {
     return { status: "geocoderUnavailable", error: "Geocoder unavailable" }
   }

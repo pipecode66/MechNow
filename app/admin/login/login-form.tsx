@@ -5,11 +5,12 @@ import { loginAction, type LoginState } from "@/app/admin/actions"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { DEMO_ADMIN_EMAIL, DEMO_ADMIN_PASSWORD } from "@/lib/demo-credentials"
 import { useI18n } from "@/lib/i18n"
 
 const initialState: LoginState = {}
 
-export function LoginForm() {
+export function LoginForm({ demoMode }: { demoMode: boolean }) {
   const { t } = useI18n()
   const [state, formAction, pending] = useActionState(loginAction, initialState)
 
@@ -18,6 +19,13 @@ export function LoginForm() {
       <div>
         <h1 className="text-2xl font-semibold">{t("admin.login")}</h1>
       </div>
+      {demoMode && (
+        <div className="rounded-lg border border-border bg-background p-3 text-sm text-muted-foreground">
+          <p className="font-medium text-foreground">Credenciales demo</p>
+          <p>Email: {DEMO_ADMIN_EMAIL}</p>
+          <p>Password: {DEMO_ADMIN_PASSWORD}</p>
+        </div>
+      )}
       <div className="grid gap-1.5">
         <Label htmlFor="email">{t("admin.email")}</Label>
         <Input

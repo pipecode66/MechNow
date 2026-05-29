@@ -3,6 +3,7 @@ import "server-only"
 import bcrypt from "bcryptjs"
 import { jwtVerify, SignJWT } from "jose"
 import { cookies } from "next/headers"
+import { getSessionSecretValue } from "@/lib/demo-mode"
 
 export const ADMIN_SESSION_COOKIE = "admin_session"
 const SESSION_MAX_AGE_SECONDS = 8 * 60 * 60
@@ -20,12 +21,12 @@ export const adminCookieOptions = {
 }
 
 function getSessionSecret(): Uint8Array | null {
-  const secret = process.env.SESSION_SECRET
+  const secret = getSessionSecretValue()
   return secret ? new TextEncoder().encode(secret) : null
 }
 
 export function isSessionConfigured(): boolean {
-  return Boolean(process.env.SESSION_SECRET)
+  return Boolean(getSessionSecretValue())
 }
 
 export async function hashPassword(password: string): Promise<string> {

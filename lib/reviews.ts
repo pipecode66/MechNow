@@ -1,11 +1,12 @@
 import "server-only"
 
+import { getDemoApprovedReviews } from "@/lib/demo-data"
 import { getSupabaseServerClient } from "@/lib/supabase/server"
 import type { Review } from "@/types"
 
 export async function getApprovedReviews(): Promise<Review[]> {
   const supabase = getSupabaseServerClient()
-  if (!supabase) return []
+  if (!supabase) return getDemoApprovedReviews()
 
   try {
     const { data, error } = await supabase

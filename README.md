@@ -15,7 +15,7 @@ La aplicacion tambien incluye un panel administrativo protegido para gestionar c
 - UI: React 19.2.4, Tailwind CSS 4.3.0, shadcn/Base UI, lucide-react
 - PWA: Web App Manifest, Service Worker, iconos instalables y modo standalone
 - Backend: Next.js Route Handlers y Server Actions
-- Base de datos: Supabase PostgreSQL
+- Base de datos: Supabase PostgreSQL opcional para persistencia real
 - Validacion: Zod 4.4.3
 - Autenticacion admin: JWT con jose 6.2.3 y bcryptjs 3.0.3
 - SMS opcional: Twilio 6.0.2
@@ -53,6 +53,7 @@ Descripcion por capas:
 - [x] Landing publica con informacion del servicio.
 - [x] Aplicacion PWA instalable en dispositivos moviles.
 - [x] Experiencia visual bloqueada en escritorio para priorizar uso desde celular.
+- [x] Modo demo automatico sin `.env` para recorrer el flujo completo en Vercel.
 - [x] Interfaz bilingue ingles/espanol con selector de idioma.
 - [x] Flujo de reserva mobile-first de 8 pasos.
 - [x] Validacion de cobertura por codigo ZIP.
@@ -80,10 +81,30 @@ Descripcion por capas:
 - [x] Pruebas unitarias para utilidades, fechas y validadores.
 
 ## Instalacion y Ejecucion
-Requisitos:
+Requisitos para ejecutar localmente:
 - Node.js 20 o superior.
 - pnpm instalado.
-- Proyecto de Supabase para probar persistencia, reservas y panel admin.
+- Proyecto de Supabase solo si se desea persistencia real.
+
+### Modo demo para entrega universitaria
+Si no se configuran variables de entorno, MechNow funciona automaticamente en modo demo. Este modo permite tomar capturas y comprobar el flujo principal sin Supabase, Twilio ni Google Maps:
+
+- ZIPs de Sacramento disponibles desde datos locales.
+- Disponibilidad con horarios libres.
+- Creacion de citas con ID demo.
+- Lista de espera y resenas con respuesta exitosa.
+- Resenas y dashboard admin con datos de ejemplo.
+- Confirmacion manual de direccion cuando no se valida con geocodificador.
+- SMS omitidos sin bloquear el flujo.
+
+Credenciales demo del panel administrativo:
+
+```text
+Email: admin@mechnow.com
+Password: MechNow123!
+```
+
+En PC, active vista movil del navegador para usar la aplicacion porque la interfaz esta bloqueada para escritorio.
 
 Desde la carpeta raiz real del proyecto:
 
@@ -109,7 +130,7 @@ NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=
 SESSION_SECRET=
 ```
 
-Preparar Supabase:
+Preparar Supabase para persistencia real, opcional:
 1. Crear un proyecto en Supabase.
 2. Abrir SQL Editor.
 3. Ejecutar `scripts/004-full-setup.sql`.
@@ -151,7 +172,7 @@ Resultado de validacion local:
 - `pnpm test`: 3 archivos y 14 pruebas correctas.
 - `pnpm build`: correcto.
 
-Nota: sin `.env.local`, las paginas publicas cargan, pero los servicios que requieren Supabase responden como no disponibles.
+Nota: sin `.env.local`, la aplicacion usa modo demo. Con `.env.local` completo, usa Supabase y credenciales reales.
 
 ## Capturas de Pantalla
 | Pantalla | Captura |

@@ -2,6 +2,11 @@ import { redirect } from "next/navigation"
 import { AdminDashboardContent } from "@/components/admin/admin-dashboard-content"
 import { getAdminSession } from "@/lib/auth"
 import { getTodayIsoDate } from "@/lib/date-utils"
+import {
+  getDemoAppointments,
+  getDemoPendingReviews,
+  getDemoTechnicians,
+} from "@/lib/demo-data"
 import { getSupabaseAdminClient } from "@/lib/supabase/admin"
 import { listServiceZipCodes } from "@/lib/service-zip-codes"
 import type { Appointment, DashboardMetrics, Review, Technician } from "@/types"
@@ -54,6 +59,10 @@ export default async function AdminDashboardPage() {
     zipCodes = (zipsResult.data ?? [])
       .map((row) => (row as { zip_code?: string }).zip_code)
       .filter((zip): zip is string => Boolean(zip))
+  } else {
+    appointments = getDemoAppointments()
+    technicians = getDemoTechnicians()
+    pendingReviews = getDemoPendingReviews()
   }
 
   return (

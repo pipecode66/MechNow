@@ -1,15 +1,19 @@
 import "server-only"
 
 import { getSupabaseServerClient } from "@/lib/supabase/server"
+import { SACRAMENTO_ZIPS } from "@/lib/zip-city"
+
 export type ServiceZipLookup =
   | { available: true; covered: boolean }
   | { available: false }
+
+const FALLBACK_ZIP_CODES = SACRAMENTO_ZIPS.map((item) => item.zip)
 
 export async function checkServiceZipCode(zip: string): Promise<ServiceZipLookup> {
   const supabase = getSupabaseServerClient()
 
   if (!supabase) {
-    return { available: false }
+    return { available: true, covered: FALLBACK_ZIP_CODES.includes(zip) }
   }
 
   try {
@@ -30,7 +34,7 @@ export async function listServiceZipCodes(): Promise<string[]> {
   const supabase = getSupabaseServerClient()
 
   if (!supabase) {
-    return []
+    return FALLBACK_ZIP_CODES
   }
 
   try {

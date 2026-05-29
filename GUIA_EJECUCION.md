@@ -1,8 +1,8 @@
-# Guia de Ejecucion - Rapi Mobile Mechanic
+# Guia de Ejecucion - MechNow
 
 ## Descripcion
 
-Rapi Mobile Mechanic es una aplicacion web mobile-first para reservar servicios de
+MechNow es una aplicacion web mobile-first para reservar servicios de
 mecanica movil. Incluye:
 
 - Landing publica.

@@ -11,7 +11,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
-      <div className="mx-auto flex min-h-16 w-full max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
+      <div className="mx-auto flex min-h-16 w-full max-w-6xl items-center justify-between gap-2 px-3 min-[390px]:px-4 sm:px-6">
         <Link href="/" className="shrink-0">
           <BrandLogo />
         </Link>
@@ -25,10 +25,10 @@ export function Header() {
           </Link>
           <Link
             href="/admin/login"
-            className="hidden min-h-11 items-center gap-2 rounded-lg border border-border bg-card px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:inline-flex"
+            className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-border bg-card px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
           >
             <ShieldCheck className="size-4" aria-hidden="true" />
-            {t("nav.admin")}
+            <span className="sr-only sm:not-sr-only">{t("nav.admin")}</span>
           </Link>
           <LanguageSwitcher />
         </nav>

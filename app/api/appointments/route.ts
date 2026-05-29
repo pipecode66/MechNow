@@ -75,7 +75,7 @@ export async function POST(request: Request) {
   const saved = data as { id: string }
   const customerSms = await sendSms(
     appointment.phone,
-    `Rapi Mobile Mechanic: appointment request received for ${appointment.appointmentDate} at ${appointment.appointmentTime}.`
+    `MechNow: appointment request received for ${appointment.appointmentDate} at ${appointment.appointmentTime}.`
   )
   const adminSms = await sendAdminSms(
     `New booking: ${appointment.firstName} ${appointment.lastName}, ${appointment.serviceType}, ${appointment.appointmentDate} ${appointment.appointmentTime}, ${appointment.address}.`

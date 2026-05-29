@@ -19,7 +19,7 @@ export function LanguageSwitcher() {
           type="button"
           onClick={() => setLang(option)}
           className={cn(
-            "min-h-9 min-w-11 rounded-md px-3 text-sm font-medium uppercase transition-colors",
+            "min-h-9 min-w-9 rounded-md px-2 text-sm font-medium uppercase transition-colors min-[380px]:min-w-11 min-[380px]:px-3",
             lang === option
               ? "bg-primary text-primary-foreground"
               : "text-muted-foreground hover:bg-muted hover:text-foreground"

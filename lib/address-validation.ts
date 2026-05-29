@@ -59,7 +59,7 @@ async function tryNominatim(address: AddressInfo): Promise<AddressValidationResu
 
   const response = await fetch(`https://nominatim.openstreetmap.org/search?${params}`, {
     headers: {
-      "User-Agent": "RapiMobileMechanic/1.0",
+      "User-Agent": "MechNow/1.0",
       Accept: "application/json",
     },
   })

@@ -58,6 +58,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  overscroll-behavior-y: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 a {
@@ -70,4 +72,75 @@ input,
 select,
 textarea {
   font: inherit;
+}
+
+.mobile-app-shell {
+  min-height: 100svh;
+}
+
+.desktop-blocker {
+  display: none;
+}
+
+.desktop-blocker__panel {
+  width: min(100% - 3rem, 430px);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--card);
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 24px 80px rgb(23 33 27 / 0.16);
+}
+
+.desktop-blocker__icon {
+  display: grid;
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto 1.25rem;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--primary);
+}
+
+.desktop-blocker__kicker {
+  margin: 0 0 0.5rem;
+  color: var(--primary);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.desktop-blocker h1 {
+  margin: 0;
+  color: var(--foreground);
+  font-size: 1.75rem;
+  line-height: 1.15;
+}
+
+.desktop-blocker p:last-child {
+  margin: 0.875rem 0 0;
+  color: var(--muted-foreground);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+@media (min-width: 768px), (hover: hover) and (pointer: fine) {
+  body {
+    overflow: hidden;
+  }
+
+  .mobile-app-shell {
+    display: none;
+  }
+
+  .desktop-blocker {
+    display: grid;
+    min-height: 100svh;
+    place-items: center;
+    padding: 1.5rem;
+    background:
+      linear-gradient(135deg, rgb(15 107 79 / 0.16), transparent 38%),
+      var(--background);
+  }
 }

@@ -13,6 +13,7 @@ La aplicacion tambien incluye un panel administrativo protegido para gestionar c
 - Framework: Next.js 16.2.6 App Router
 - Lenguaje: TypeScript 5.9.3
 - UI: React 19.2.4, Tailwind CSS 4.3.0, shadcn/Base UI, lucide-react
+- PWA: Web App Manifest, Service Worker, iconos instalables y modo standalone
 - Backend: Next.js Route Handlers y Server Actions
 - Base de datos: Supabase PostgreSQL
 - Validacion: Zod 4.4.3
@@ -50,6 +51,8 @@ Descripcion por capas:
 
 ## Especificaciones Funcionales
 - [x] Landing publica con informacion del servicio.
+- [x] Aplicacion PWA instalable en dispositivos moviles.
+- [x] Experiencia visual bloqueada en escritorio para priorizar uso desde celular.
 - [x] Interfaz bilingue ingles/espanol con selector de idioma.
 - [x] Flujo de reserva mobile-first de 8 pasos.
 - [x] Validacion de cobertura por codigo ZIP.

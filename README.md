@@ -175,14 +175,18 @@ Resultado de validacion local:
 Nota: sin `.env.local`, la aplicacion usa modo demo. Con `.env.local` completo, usa Supabase y credenciales reales.
 
 ## Capturas de Pantalla
-| Pantalla | Captura |
-|---|---|
-| Home | `screenshots/home.png` |
-| Flujo de reserva | `screenshots/booking.png` |
-| Login admin | `screenshots/admin-login.png` |
-| Dashboard admin | `screenshots/admin-dashboard.png` |
-
-Las capturas deben agregarse en una carpeta `screenshots/` cuando se prepare la entrega visual del proyecto.
+| Orden | Pantalla | Captura | Descripcion |
+|---|---|---|---|
+| 1 | Inicio | <img src="screenshots/flow-01-home.jpeg" width="220" alt="Pantalla de inicio de MechNow" /> | La portada presenta MechNow como servicio de mecanica movil, muestra el llamado principal para iniciar la reserva y permite cambiar entre ingles y espanol. |
+| 2 | Validacion de cobertura | <img src="screenshots/flow-02-zip-coverage.jpeg" width="220" alt="Validacion de cobertura por ZIP" /> | El usuario ingresa su codigo ZIP y la aplicacion confirma si existe cobertura antes de continuar con la reserva. |
+| 3 | Informacion del vehiculo | <img src="screenshots/flow-03-vehicle.jpeg" width="220" alt="Formulario de informacion del vehiculo" /> | En este paso se puede decodificar un VIN o completar manualmente los datos del vehiculo: ano, marca, modelo y tipo de motor. |
+| 4 | Seleccion de servicios | <img src="screenshots/flow-04-services.jpeg" width="220" alt="Seleccion de servicios mecanicos" /> | El usuario selecciona el servicio mecanico que necesita, como cambio de aceite, bateria, frenos, diagnostico, mantenimiento o inspeccion general. |
+| 5 | Direccion del servicio | <img src="screenshots/flow-05-address.jpeg" width="220" alt="Direccion del servicio y confirmacion manual" /> | La aplicacion solicita la direccion donde se atendera el vehiculo y permite confirmarla manualmente cuando la validacion externa no esta disponible. |
+| 6 | Datos de contacto | <img src="screenshots/flow-06-contact.jpeg" width="220" alt="Formulario de datos de contacto" /> | El cliente registra nombre, apellido, correo, telefono y fuente de referencia para completar la solicitud de cita. |
+| 7 | Seleccion de horario | <img src="screenshots/flow-07-appointment-time.jpeg" width="220" alt="Seleccion de fecha y hora de cita" /> | El usuario escoge la fecha y una franja horaria disponible antes de confirmar definitivamente la reserva. |
+| 8 | Confirmacion de cita | <img src="screenshots/flow-08-confirmation.jpeg" width="220" alt="Confirmacion de cita solicitada" /> | El sistema muestra la cita solicitada con ID demo, fecha, hora, servicio y direccion, confirmando que el flujo de reserva finalizo correctamente. |
+| 9 | Portada en navegador movil | <img src="screenshots/flow-09-home-repeat.jpeg" width="220" alt="Portada de MechNow en navegador movil" /> | Esta captura refuerza que la aplicacion esta optimizada para visualizacion movil/PWA y conserva la experiencia principal desde Safari. |
+| 10 | Dashboard administrativo | <img src="screenshots/flow-10-admin-dashboard.jpeg" width="220" alt="Dashboard administrativo de MechNow" /> | El administrador visualiza metricas de citas, estados del servicio y tarjetas de reservas para revisar detalles o actualizar el estado de cada solicitud. |
 
 ## Servicios Web Consumidos
 | Metodo | Endpoint | Descripcion |
